@@ -25,3 +25,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Commandos
+
+### Criando Componentes via CLI(COMAND INLINE INTERFACE)
+
+`ng generate component painel`
+
+Ou
+
+`ng g c painel`
+
+e para criar sem a spec:
+
+`ng g c painel --skip-tests=true`
