@@ -9,4 +9,6 @@ import { Component } from "@angular/core";
     //style inline styles: [`.exemplo { color: red}`],
     styleUrls: ['./topo.component.css']
 })
-export class TopoComponent {}
+export class TopoComponent {
+    public titulo: string = 'Aprendendo Inglês'
+}
