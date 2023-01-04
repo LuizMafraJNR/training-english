@@ -14,3 +14,11 @@ h6, p, textarea, button {
     background-position: center center;
     background-size: cover;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 30%;
+}
