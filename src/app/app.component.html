@@ -1,4 +1,6 @@
 <app-top></app-top>
-<app-painel></app-painel>
+<div *ngIf="jogoEmAndamento">
+  <app-painel (encerrarJogo)="encerrarJogo($event)"></app-painel>
+</div>
 <!-- <div app-top></div> -->
 <!-- <div class='app-top'></div> -->

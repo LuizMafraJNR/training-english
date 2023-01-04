@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Frase } from '../shared/frase.model';
 import { FRASES } from './frases-mock';
 
@@ -7,7 +7,7 @@ import { FRASES } from './frases-mock';
   templateUrl: './painel.component.html',
   styleUrls: ['./painel.component.css'],
 })
-export class PainelComponent implements OnInit {
+export class PainelComponent implements OnInit, OnDestroy {
   public frases: Array<Frase> = FRASES;
   public instrucao: string = 'Traduza a frase:';
   public respostaInput: string = ""
@@ -19,12 +19,16 @@ export class PainelComponent implements OnInit {
 
   public tentativas: number = 3 
 
+  @Output() public encerrarJogo = new EventEmitter()
   constructor() {
     this.atualizaRodada()
   }
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+      console.log("Componente painel foi destruido")
+  }
 
   public atualizaResposta(resposta: Event): void {
     this.respostaInput = (<HTMLInputElement>resposta.target).value;
@@ -36,11 +40,18 @@ export class PainelComponent implements OnInit {
 
       // Adiciona rodada e verifica respostas
       this.rodada++;
-      this.atualizaRodada()
+      
+      // concluir
+      if(this.rodada == 4) {
+        alert('Traduções concluidas, parabens!')
+        this.encerrarJogo.emit('Vitoria')
+      }
 
       // Progresso
       this.progresso = this.progresso + (100 / this.frases.length)
-
+      
+      // atualiza rodada
+      this.atualizaRodada()
     } else {
       alert('A tradução está errada!');
 
@@ -48,6 +59,7 @@ export class PainelComponent implements OnInit {
       this.tentativas--
       if(this.tentativas == -1) {
         alert('Você perdeu todas as tentativas.')
+        this.encerrarJogo.emit('Derrota')
       }
      
     }
